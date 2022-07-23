@@ -1,10 +1,9 @@
 package com.example.pokedex.data.remote
 
 import com.example.pokedex.data.model.PokemonList
+import com.example.pokedex.repository.WebService
 
-class PokemonDataSource {
+class PokemonDataSource(private val webService: WebService) {
 
-    fun getPokemon():PokemonList{
-        return PokemonList()
-    }
+    suspend fun getPokemon():PokemonList= webService.getPokemon()
 }
