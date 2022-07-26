@@ -14,5 +14,7 @@ class PokemonFragment : Fragment(R.layout.fragment_pokemon) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentPokemonBinding.bind(view)
+
+
     }
 }
