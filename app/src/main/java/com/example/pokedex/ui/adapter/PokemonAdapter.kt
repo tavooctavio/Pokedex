@@ -23,7 +23,7 @@ class PokemonAdapter:RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     private inner class PokemonViewHolder(val binding: PokemonItemBinding): BaseViewHolder<Pokemon>(binding.root){
         override fun bind(item: Pokemon) {
-            binding.btnPokemonName.text = Pokemon.get(position).name
+            binding.btnPokemonName.text = item.name
         }
 
     }
