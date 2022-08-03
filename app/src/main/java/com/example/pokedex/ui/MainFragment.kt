@@ -6,16 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.R
 import com.example.pokedex.core.Resource
+import com.example.pokedex.data.model.Pokemon
+import com.example.pokedex.data.model.PokemonDetails
 import com.example.pokedex.data.remote.PokemonDataSource
 import com.example.pokedex.databinding.FragmentMainBinding
 import com.example.pokedex.presentation.PokemonViewModel
 import com.example.pokedex.presentation.PokemonViewModelFactory
 import com.example.pokedex.repository.PokemonRepositoryImpl
 import com.example.pokedex.repository.RetrofitClient
+import com.example.pokedex.ui.adapter.PokemonAdapter
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : Fragment(R.layout.fragment_main), PokemonAdapter.OnPokemonClickListener {
 
     private lateinit var binding: FragmentMainBinding
     private val viewModel by viewModels<PokemonViewModel> { PokemonViewModelFactory(PokemonRepositoryImpl(
@@ -33,7 +37,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                     Log.d("LiveData", "Loading")
                 }
                 is Resource.Success ->{
-                    Log.d("LiveData", "${result.data}")
+                    binding.recyclerView.layoutManager = LinearLayoutManager(context)
+                    binding.recyclerView.adapter = PokemonAdapter(result.data.results,this@MainFragment)
                 }
                 is Resource.Failure ->{
                     Log.d("Error", "${result.exception}")
@@ -41,4 +46,9 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
         })
     }
+
+    override fun onPokemonClick(pokemon: Pokemon) {
+
+    }
+
 }
