@@ -1,11 +1,13 @@
 package com.example.pokedex.ui
 
 import android.os.Bundle
+import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.R
 import com.example.pokedex.core.Resource
@@ -48,7 +50,8 @@ class MainFragment : Fragment(R.layout.fragment_main), PokemonAdapter.OnPokemonC
     }
 
     override fun onPokemonClick(pokemon: Pokemon) {
-
+        val action = MainFragmentDirections.actionMainFragmentToPokemonFragment(pokemon.name)
+        findNavController().navigate(action)
     }
 
 }
